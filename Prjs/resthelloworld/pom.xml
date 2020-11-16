@@ -12,8 +12,8 @@
     <artifactId>resthelloworld</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>resthelloworld</name>
-    <description>Demo project for Spring Boot</description>
+    <name>RestHelloWorld</name>
+    <description>Rest Hello World project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -51,7 +51,7 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.7</version>
-            <scope>test</scope>
+            <scope>provided</scope>
         </dependency>
 
         <!-- hot swapping, disable cache for template, enable live reload -->
@@ -60,11 +60,17 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
