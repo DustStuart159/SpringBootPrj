@@ -15,13 +15,13 @@ public class BookController {
     @Autowired
     private BookRepository repository;
 
-    // Find
+    // Tìm tất cả sách trong repository
     @GetMapping("/books")
     List<Book> findAll(){
         return repository.findAll();
     }
 
-    // Save
+    // Thêm sách vào repository
     // return 201 instead of 200
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/books")
@@ -29,14 +29,14 @@ public class BookController {
         return repository.save(newBook);
     }
 
-    // Find
+    // Tìm sách theo id
     @GetMapping("/books/{id}")
     Book findOne(@PathVariable Long id){
         return repository.findById(id)
                 .orElseThrow(()->new BookNotFoundException(id));
     }
 
-    // Save or update
+    // sửa thông tin sách theo id
     @PutMapping("/books/{id}")
     Book saveOrUpdate(@RequestBody Book newBook, @PathVariable Long id){
         return repository.findById(id)
@@ -52,7 +52,7 @@ public class BookController {
                 });
     }
 
-    //update author only
+    //sửa thông tin author của sách theo id
     @PatchMapping("/books/{id}")
     Book patch(@RequestBody Map<String, String> update, @PathVariable Long id){
         return repository.findById(id)
@@ -64,12 +64,7 @@ public class BookController {
                         // better create a custom method to update a value = :newValue where id = :id
                         return repository.save(x);
                     }else {
-                        try {
-                            throw new BookUnSupportedFieldPatchException(update.keySet());
-                        } catch (BookUnSupportedFieldPatchException e) {
-                            e.printStackTrace();
-                            return null;
-                        }
+                        throw new BookUnSupportedFieldPatchException(update.keySet());
                     }
                 })
                 .orElseGet(()->{
