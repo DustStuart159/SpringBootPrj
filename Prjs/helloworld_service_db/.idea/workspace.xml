@@ -22,7 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb0aad2b-3c9b-47ec-9ef7-3f738fbd7096" name="Default Changelist" comment="" />
+    <list default="true" id="cb0aad2b-3c9b-47ec-9ef7-3f738fbd7096" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../database/src/main/java/com/stuart/database/ServletInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../database/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../database/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,7 +57,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../database" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../resthelloworld" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -66,6 +70,17 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SpringBootWebApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="helloworld_service_db" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.stuart.SpringBootWebApplication" />
@@ -87,6 +102,7 @@
       <workItem from="1605717837825" duration="2396000" />
       <workItem from="1605720291576" duration="1066000" />
       <workItem from="1605783512137" duration="177000" />
+      <workItem from="1605804874240" duration="752000" />
     </task>
     <servers />
   </component>
@@ -110,10 +126,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="416" y="337" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1605718626189" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1605790474039">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1605805724312">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605790474039" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605805724312" />
     <state x="686" y="211" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1605783625733" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1605783692513">
       <screen x="0" y="0" width="1920" height="1040" />
