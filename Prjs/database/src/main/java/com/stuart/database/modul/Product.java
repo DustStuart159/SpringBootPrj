@@ -14,10 +14,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String brand;
-    private String madein;
+    private String author;
     private float price;
-
-    public Product() {
-    }
 }

@@ -43,6 +43,9 @@
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: org.webjars:bootstrap:3.3.7" />
           <element id="library" level="project" name="Maven: org.webjars:jquery:1.11.1" />
+          <element id="archive" name="spring-boot-web-jsp-1.0.jar">
+            <element id="module-output" name="helloworld" />
+          </element>
         </element>
       </element>
       <element id="directory" name="META-INF">
