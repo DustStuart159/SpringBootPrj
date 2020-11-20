@@ -5,6 +5,7 @@ import com.stuart.hello_rest_db.error.BookUnSupportedFieldPatchException;
 import com.stuart.hello_rest_db.modul.Product;
 import com.stuart.hello_rest_db.modul.ProductRepository;
 
+import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
@@ -36,50 +37,53 @@ public class RestController {
     // Tìm product theo id
     @GetMapping("/api/products/{id}")
     Product findOne(@PathVariable Long id){
-        try {
-            return repository.findOne(id);
-        }catch (Exception e) {
-            throw  new BookNotFoundException(id);
+        Product product = repository.findOne(id);
+        if (null==product){
+            throw new BookNotFoundException(id);
         }
+
+        return product;
     }
 
     // sửa thông tin sách theo id
     @PutMapping("/api/products/{id}")
     Product saveOrUpdate(@RequestBody Product newBook, @PathVariable Long id){
-        try {
-            Product product = repository.findOne(id);
+        Product product = repository.findOne(id);
+        if (null==product){
+            throw new BookNotFoundException(id);
+        }else{
             product.setName(newBook.getName());
             product.setAuthor(newBook.getAuthor());
             product.setPrice(newBook.getPrice());
 
             return product;
-        } catch (Exception e){
-            newBook.setId(id);
-            return  repository.save(newBook);
         }
     }
 
     //sửa thông tin author của sách theo id
     @PatchMapping("/api/products/{id}")
     Product patch(@RequestBody Map<String, String> update, @PathVariable Long id){
-        try {
             Product product = repository.findOne(id);
+            if (null==product){
+                throw new BookNotFoundException(id);
+            }
 
             String author = update.get("author");
-            if (!StringUtils.isEmpty(author)){
-                product.setAuthor(author);
-
-                return repository.save(product);
-            }else {
+            if (StringUtils.isEmpty(author)){
                 throw new BookUnSupportedFieldPatchException(update.keySet());
             }
-        }catch (Exception e){
-            throw new BookNotFoundException(id);
-        }
+
+            product.setAuthor(author);
+            return repository.save(product);
     }
 
     @DeleteMapping("/api/products/{id}")
     void deleteBook(@PathVariable Long id){
+        Product product = repository.findOne(id);
+        if (null==product){
+            throw new BookNotFoundException(id);
+        }
+        
         repository.delete(id);
     }
 
