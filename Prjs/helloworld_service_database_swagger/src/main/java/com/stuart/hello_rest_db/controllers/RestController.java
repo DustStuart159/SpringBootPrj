@@ -4,8 +4,10 @@ import com.stuart.hello_rest_db.error.BookNotFoundException;
 import com.stuart.hello_rest_db.error.BookUnSupportedFieldPatchException;
 import com.stuart.hello_rest_db.modul.Product;
 import com.stuart.hello_rest_db.modul.ProductRepository;
+import com.stuart.hello_rest_db.modul.SuccessEntity;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -101,7 +103,7 @@ public class RestController {
 
     @DeleteMapping("/products/{id}")
     @ApiOperation(value = "Delete Product by Id", produces = "application/json")
-    void deleteBook(
+    SuccessEntity deleteBook(
             @ApiParam(name = "Id",
                     value = "The Id of the Product to be deleted",
                     required = true)
@@ -112,12 +114,13 @@ public class RestController {
         }
         
         repository.delete(id);
+        return new SuccessEntity(DateTime.now().toString(),"Deleted Product.");
     }
 
     @DeleteMapping("/products")
     @ApiOperation(value = "Delete all Products")
-    void deleteAll(){
+    SuccessEntity deleteAll(){
         repository.deleteAll();
+        return new SuccessEntity(DateTime.now().toString(),"Deleted all Products.");
     }
-
 }

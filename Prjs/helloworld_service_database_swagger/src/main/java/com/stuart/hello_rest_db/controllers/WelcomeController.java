@@ -25,6 +25,6 @@ public class WelcomeController {
 
 	@RequestMapping("/api")
 	public String showApiInfo(){
-		return "redirect:/swagger-ui.html#/";
+		return "redirect:/swagger-ui.html";
 	}
 }
