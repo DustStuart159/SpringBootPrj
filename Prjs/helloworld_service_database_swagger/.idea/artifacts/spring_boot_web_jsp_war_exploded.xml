@@ -14,6 +14,9 @@
           <element id="module-output" name="spring-boot-web-jsp" />
         </element>
         <element id="directory" name="lib">
+          <element id="archive" name="spring-boot-web-jsp-1.0.jar">
+            <element id="module-output" name="spring-boot-web-jsp" />
+          </element>
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter:1.4.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-logging:1.4.2.RELEASE" />
@@ -73,9 +76,6 @@
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: org.webjars:bootstrap:3.3.7" />
           <element id="library" level="project" name="Maven: org.webjars:jquery:1.11.1" />
-          <element id="archive" name="spring-boot-web-jsp-1.0.jar">
-            <element id="module-output" name="spring-boot-web-jsp" />
-          </element>
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-actuator:1.4.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-actuator:1.4.2.RELEASE" />
           <element id="library" level="project" name="Maven: io.springfox:springfox-swagger2:2.5.0" />
@@ -102,6 +102,8 @@
           <element id="library" level="project" name="Maven: com.google.inject.extensions:guice-assistedinject:3.0" />
           <element id="library" level="project" name="Maven: joda-time:joda-time:2.9.5" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.3.2" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.16/mysql-connector-java-8.0.16.jar" output-file-name="mysql-mysql-connector-java-8.0.16.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.6.1/protobuf-java-3.6.1.jar" output-file-name="com.google.protobuf-protobuf-java-3.6.1.jar" />
         </element>
       </element>
       <element id="directory" name="META-INF">
