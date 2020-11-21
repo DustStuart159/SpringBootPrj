@@ -17,11 +17,12 @@ import java.util.List;
 
 @Controller
 @ApiIgnore
+@RequestMapping("/crud")
 public class GuiController {
     @Autowired
     private ProductService service;
 
-    @RequestMapping("/crud")
+    @RequestMapping("")
     public String viewHomePage(Model model){
         List<Product> listProducts = service.listAll();
         model.addAttribute("listProducts", listProducts);
@@ -29,7 +30,7 @@ public class GuiController {
         return "read_product";
     }
 
-    @RequestMapping("/crud/new")
+    @RequestMapping("/new")
     public String showNewProductPage(Model model){
         Product product = new Product();
         model.addAttribute("product", product);
@@ -37,14 +38,14 @@ public class GuiController {
         return "new_product";
     }
 
-    @RequestMapping(value = "/crud/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveProduct(@ModelAttribute("product") Product product){
         service.save(product);
 
         return "redirect:/crud";
     }
 
-    @RequestMapping("/crud/edit/{id}")
+    @RequestMapping("/edit/{id}")
     public ModelAndView showEditProductPage(@PathVariable(name = "id") int id){
         ModelAndView mav = new ModelAndView("edit_product");
         Product product = service.get(id);
@@ -53,7 +54,7 @@ public class GuiController {
         return mav;
     }
 
-    @RequestMapping("crud/delete/{id}")
+    @RequestMapping("delete/{id}")
     public String deleteProduct(@PathVariable(name = "id") int id){
         service.delete(id);
         return "redirect:/crud";

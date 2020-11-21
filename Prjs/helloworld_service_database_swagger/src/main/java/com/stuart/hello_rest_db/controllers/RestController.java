@@ -4,24 +4,17 @@ import com.stuart.hello_rest_db.error.BookNotFoundException;
 import com.stuart.hello_rest_db.error.BookUnSupportedFieldPatchException;
 import com.stuart.hello_rest_db.modul.Product;
 import com.stuart.hello_rest_db.modul.ProductRepository;
-
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @org.springframework.web.bind.annotation.RestController
-
 @RequestMapping(value = "/api")
 public class RestController {
     @Autowired
@@ -62,18 +55,23 @@ public class RestController {
     // sửa thông tin sách theo id
     @PutMapping("/products/{id}")
     @ApiOperation(value = "Modify Product by Id", produces = "application/json")
-    Product saveOrUpdate(@RequestBody Product newBook,
-                         @ApiParam(name = "Id",
-                                 value = "The Id of the Product to be modified",
-                                 required = true)
-                         @PathVariable Long id){
+    Product saveOrUpdate(
+            @ApiParam(name = "Request Message",
+                    value = "The information of the Product to be modified",
+                    required = true)
+            @RequestBody Product newProduct,
+
+            @ApiParam(name = "Id",
+                    value = "The Id of the Product to be modified",
+                    required = true)
+            @PathVariable Long id){
         Product product = repository.findOne(id);
         if (null==product){
             throw new BookNotFoundException(id);
         }else{
-            product.setName(newBook.getName());
-            product.setAuthor(newBook.getAuthor());
-            product.setPrice(newBook.getPrice());
+            product.setName(newProduct.getName());
+            product.setAuthor(newProduct.getAuthor());
+            product.setPrice(newProduct.getPrice());
 
             return product;
         }
