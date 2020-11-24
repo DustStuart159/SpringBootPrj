@@ -1,6 +1,6 @@
 package com.stuart.hello_rest_db.services;
 
-import com.stuart.hello_rest_db.modul.Product;
+import com.stuart.hello_rest_db.modul.Entities.Product;
 import com.stuart.hello_rest_db.modul.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class ProductService {
     @Autowired
     private ProductRepository repo;
@@ -29,5 +28,7 @@ public class ProductService {
     public void delete(long id){
         repo.delete(id);
     }
+
+    public Product getByName(String name){return null;}
 
 }
