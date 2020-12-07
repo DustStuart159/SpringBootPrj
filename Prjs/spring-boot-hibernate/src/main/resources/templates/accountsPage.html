@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank</title>
+    <style>
+        th,td{
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include header.html -->
+    <th:block th:include="/header"/>
+    <h2>Accounts</h2>
+    <table border="1">
+        <tr>
+            <td>ID</td>
+            <td>Full Name</td>
+            <td>Balance</td>
+        </tr>
+        <tr th:each="accountInfo:${accountInfos}">
+            <td th:utext="${accountInfo.id}">..</td>
+            <td th:utext="${accountInfo.full_name}">..</td>
+            <td th:utext="${accountInfo.balance}">..</td>
+        </tr>
+    </table>
+</body>
+</html>
