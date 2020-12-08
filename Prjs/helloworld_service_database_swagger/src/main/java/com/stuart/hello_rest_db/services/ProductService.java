@@ -21,11 +21,11 @@ public class ProductService {
     }
 
     public ProductEntity get(long id){
-        return repo.findOne(id);
+        return repo.findById(id).get();
     }
 
     public void delete(long id){
-        repo.delete(id);
+        repo.deleteById(id);
     }
 
     public ProductEntity getByName(String name){return null;}

@@ -45,7 +45,7 @@ public class RestController {
                     value = "The Id of the ProductEntity to be viewed",
                     required = true)
             @PathVariable Long id){
-        ProductEntity product = repository.findOne(id);
+        ProductEntity product = repository.findById(id).get();
         if (null==product){
             throw new BookNotFoundException(id);
         }
@@ -66,7 +66,7 @@ public class RestController {
                     value = "The Id of the ProductEntity to be modified",
                     required = true)
             @PathVariable Long id){
-        ProductEntity product = repository.findOne(id);
+        ProductEntity product = repository.findById(id).get();
         if (null==product){
             throw new BookNotFoundException(id);
         }else{
@@ -86,7 +86,7 @@ public class RestController {
                           value = "The Id of the ProductEntity to modify author",
                           required = true)
                   @PathVariable Long id){
-            ProductEntity product = repository.findOne(id);
+            ProductEntity product = repository.findById(id).get();
             if (null==product){
                 throw new BookNotFoundException(id);
             }
@@ -107,12 +107,12 @@ public class RestController {
                     value = "The Id of the ProductEntity to be deleted",
                     required = true)
             @PathVariable Long id){
-        ProductEntity product = repository.findOne(id);
+        ProductEntity product = repository.findById(id).get();
         if (null==product){
             throw new BookNotFoundException(id);
         }
         
-        repository.delete(id);
+        repository.deleteById(id);
         return new SuccessEntity(DateTime.now().toString(),"Deleted ProductEntity.");
     }
 
