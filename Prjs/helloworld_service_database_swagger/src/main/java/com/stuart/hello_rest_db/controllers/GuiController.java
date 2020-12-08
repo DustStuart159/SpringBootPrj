@@ -1,7 +1,7 @@
 package com.stuart.hello_rest_db.controllers;
 
 
-import com.stuart.hello_rest_db.modul.Entities.Product;
+import com.stuart.hello_rest_db.modul.Entities.ProductEntity;
 import com.stuart.hello_rest_db.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class GuiController {
 
     @RequestMapping("")
     public String viewHomePage(Model model){
-        List<Product> listProducts = service.listAll();
+        List<ProductEntity> listProducts = service.listAll();
         model.addAttribute("listProducts", listProducts);
 
         return "read_product";
@@ -32,14 +32,14 @@ public class GuiController {
 
     @RequestMapping("/new")
     public String showNewProductPage(Model model){
-        Product product = new Product();
+        ProductEntity product = new ProductEntity();
         model.addAttribute("product", product);
 
         return "new_product";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveProduct(@ModelAttribute("product") Product product){
+    public String saveProduct(@ModelAttribute("product") ProductEntity product){
         service.save(product);
 
         return "redirect:/crud";
@@ -48,7 +48,7 @@ public class GuiController {
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditProductPage(@PathVariable(name = "id") int id){
         ModelAndView mav = new ModelAndView("edit_product");
-        Product product = service.get(id);
+        ProductEntity product = service.get(id);
         mav.addObject("product", product);
 
         return mav;

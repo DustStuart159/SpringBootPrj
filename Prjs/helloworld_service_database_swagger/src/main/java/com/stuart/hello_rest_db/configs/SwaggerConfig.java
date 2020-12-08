@@ -37,9 +37,9 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "CRUD Product By API",
-                "An service to CRUD Product from a Product repository by Product ID",
-                "CRUD Product v1",
+                "CRUD ProductEntity By API",
+                "An service to CRUD ProductEntity from a ProductEntity repository by ProductEntity ID",
+                "CRUD ProductEntity v1",
                 "Terms of service",
 				new Contact("Di Tuot", "https://no-url.com","test@gmail.com"),
                 "License of API",

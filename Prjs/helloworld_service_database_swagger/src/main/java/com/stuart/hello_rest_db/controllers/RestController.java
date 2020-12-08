@@ -2,7 +2,7 @@ package com.stuart.hello_rest_db.controllers;
 
 import com.stuart.hello_rest_db.error.BookNotFoundException;
 import com.stuart.hello_rest_db.error.BookUnSupportedFieldPatchException;
-import com.stuart.hello_rest_db.modul.Entities.Product;
+import com.stuart.hello_rest_db.modul.Entities.ProductEntity;
 import com.stuart.hello_rest_db.modul.ProductRepository;
 import com.stuart.hello_rest_db.modul.Entities.SuccessEntity;
 import io.swagger.annotations.ApiOperation;
@@ -23,8 +23,8 @@ public class RestController {
 
     // Tìm tất cả sách trong repository
     @GetMapping("/products")
-    @ApiOperation(value = "Get All Product", produces = "application/json")
-    List<Product> findAll(){
+    @ApiOperation(value = "Get All ProductEntity", produces = "application/json")
+    List<ProductEntity> findAll(){
         return repository.findAll();
     }
 
@@ -32,20 +32,20 @@ public class RestController {
     // return 201 instead of 200
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/products")
-    @ApiOperation(value = "Save new Product", produces = "application/json")
-    Product newBook(@RequestBody Product newBook){
+    @ApiOperation(value = "Save new ProductEntity", produces = "application/json")
+    ProductEntity newBook(@RequestBody ProductEntity newBook){
         return repository.save(newBook);
     }
 
     // Tìm product theo id
     @GetMapping("/products/{id}")
-    @ApiOperation(value = "Search Product by Id", produces = "application/json")
-    Product findOne(
+    @ApiOperation(value = "Search ProductEntity by Id", produces = "application/json")
+    ProductEntity findOne(
             @ApiParam(name = "Id",
-                    value = "The Id of the Product to be viewed",
+                    value = "The Id of the ProductEntity to be viewed",
                     required = true)
             @PathVariable Long id){
-        Product product = repository.findOne(id);
+        ProductEntity product = repository.findOne(id);
         if (null==product){
             throw new BookNotFoundException(id);
         }
@@ -55,18 +55,18 @@ public class RestController {
 
     // sửa thông tin sách theo id
     @PutMapping("/products/{id}")
-    @ApiOperation(value = "Modify Product by Id", produces = "application/json")
-    Product saveOrUpdate(
+    @ApiOperation(value = "Modify ProductEntity by Id", produces = "application/json")
+    ProductEntity saveOrUpdate(
             @ApiParam(name = "Request Message",
-                    value = "The information of the Product to be modified",
+                    value = "The information of the ProductEntity to be modified",
                     required = true)
-            @RequestBody Product newProduct,
+            @RequestBody ProductEntity newProduct,
 
             @ApiParam(name = "Id",
-                    value = "The Id of the Product to be modified",
+                    value = "The Id of the ProductEntity to be modified",
                     required = true)
             @PathVariable Long id){
-        Product product = repository.findOne(id);
+        ProductEntity product = repository.findOne(id);
         if (null==product){
             throw new BookNotFoundException(id);
         }else{
@@ -80,13 +80,13 @@ public class RestController {
 
     //sửa thông tin author của sách theo id
     @PatchMapping("/products/{id}")
-    @ApiOperation(value = "Modify Author Product by Id", produces = "application/json")
-    Product patch(@RequestBody Map<String, String> update,
-                  @ApiParam(name = "Id",
-                          value = "The Id of the Product to modify author",
+    @ApiOperation(value = "Modify Author ProductEntity by Id", produces = "application/json")
+    ProductEntity patch(@RequestBody Map<String, String> update,
+                        @ApiParam(name = "Id",
+                          value = "The Id of the ProductEntity to modify author",
                           required = true)
                   @PathVariable Long id){
-            Product product = repository.findOne(id);
+            ProductEntity product = repository.findOne(id);
             if (null==product){
                 throw new BookNotFoundException(id);
             }
@@ -101,19 +101,19 @@ public class RestController {
     }
 
     @DeleteMapping("/products/{id}")
-    @ApiOperation(value = "Delete Product by Id", produces = "application/json")
+    @ApiOperation(value = "Delete ProductEntity by Id", produces = "application/json")
     SuccessEntity deleteBook(
             @ApiParam(name = "Id",
-                    value = "The Id of the Product to be deleted",
+                    value = "The Id of the ProductEntity to be deleted",
                     required = true)
             @PathVariable Long id){
-        Product product = repository.findOne(id);
+        ProductEntity product = repository.findOne(id);
         if (null==product){
             throw new BookNotFoundException(id);
         }
         
         repository.delete(id);
-        return new SuccessEntity(DateTime.now().toString(),"Deleted Product.");
+        return new SuccessEntity(DateTime.now().toString(),"Deleted ProductEntity.");
     }
 
     @DeleteMapping("/products")
