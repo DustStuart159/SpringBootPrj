@@ -57,7 +57,7 @@ public class HibernateConfig {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 
         // Package contain entity classes
-        factoryBean.setPackagesToScan("");
+        factoryBean.setPackagesToScan(new String[]{""});
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(properties);
         factoryBean.afterPropertiesSet();
