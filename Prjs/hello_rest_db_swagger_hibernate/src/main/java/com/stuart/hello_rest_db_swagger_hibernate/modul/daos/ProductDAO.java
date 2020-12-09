@@ -1,5 +1,6 @@
-package com.stuart.hello_rest_db_swagger_hibernate;
+package com.stuart.hello_rest_db_swagger_hibernate.modul.daos;
 
+import com.stuart.hello_rest_db_swagger_hibernate.modul.entities.ProductEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

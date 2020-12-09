@@ -1,5 +1,7 @@
-package com.stuart.hello_rest_db_swagger_hibernate;
+package com.stuart.hello_rest_db_swagger_hibernate.controllers;
 
+import com.stuart.hello_rest_db_swagger_hibernate.ProductDAO;
+import com.stuart.hello_rest_db_swagger_hibernate.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 

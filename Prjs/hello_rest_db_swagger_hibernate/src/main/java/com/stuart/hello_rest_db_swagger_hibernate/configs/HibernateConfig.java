@@ -1,4 +1,4 @@
-package com.stuart.hello_rest_db_swagger_hibernate;
+package com.stuart.hello_rest_db_swagger_hibernate.configs;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
