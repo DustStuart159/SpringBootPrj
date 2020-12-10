@@ -1,7 +1,8 @@
 package com.stuart.hello_rest_db_swagger_hibernate.controllers;
 
-import com.stuart.hello_rest_db_swagger_hibernate.ProductDAO;
-import com.stuart.hello_rest_db_swagger_hibernate.ProductEntity;
+
+import com.stuart.hello_rest_db_swagger_hibernate.modul.daos.ProductDAO;
+import com.stuart.hello_rest_db_swagger_hibernate.modul.entities.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -13,7 +14,7 @@ public class RestController {
     private ProductDAO dao;
 
     @GetMapping("/")
-    public List<ProductEntity> getAllRecords(){
-        return dao.listAllRecords();
+    public List<ProductEntity> findAll(){
+        return (List<ProductEntity>) dao.findAll();
     }
 }
