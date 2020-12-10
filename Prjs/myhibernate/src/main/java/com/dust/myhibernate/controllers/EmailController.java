@@ -1,42 +1,42 @@
 package com.dust.myhibernate.controllers;
 
 
-import com.dust.myhibernate.entities.Address;
-import com.dust.myhibernate.repositories.AddressRepository;
+import com.dust.myhibernate.entities.Email;
+import com.dust.myhibernate.repositories.EmailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/address")
-public class AddressController {
+@RequestMapping("/email")
+public class EmailController {
 
     @Autowired
-    private AddressRepository repo;
+    private EmailRepository repo;
 
     @PostMapping("/create")
-    public Address createOneAddress(@RequestBody Address address){
-        return repo.save(address);
+    public Email createOneAddress(@RequestBody Email email){
+        return repo.save(email);
     }
 
     @GetMapping("/get-all")
-    public List<Address> getAllRecords(){
+    public List<Email> getAllRecords(){
         return repo.findAll();
     }
 
     @GetMapping("/get-one")
-    public Address getPersonById(@RequestParam long id){
+    public Email getPersonById(@RequestParam long id){
         return repo.findById(id).get();
     }
 
     @PutMapping("/update")
-    public Address updatePersonById(@RequestParam long id, @RequestBody Address input){
-        Address address = repo.findById(id).get();
+    public Email updatePersonById(@RequestParam long id, @RequestBody Email input){
+        Email email = repo.findById(id).get();
 
-        address.setAddress(input.getAddress());
+        email.setEmail(input.getEmail());
 
-        return address;
+        return email;
     }
 
     @DeleteMapping("/delete-all")
