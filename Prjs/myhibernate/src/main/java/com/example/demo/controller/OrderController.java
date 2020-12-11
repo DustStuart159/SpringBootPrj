@@ -1,8 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.models.Products;
+import com.example.demo.service.dto.OrderDTO;
 import com.example.demo.service.dto.ProductDTO;
-import com.example.demo.service.impl.ProductServiceImpl;
+import com.example.demo.service.impl.OrderServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -12,25 +13,25 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/orders")
 @Slf4j
 @RequiredArgsConstructor
-public class ProductController {
-    private final ProductServiceImpl productServiceImpl;
+public class OrderController {
+    private final OrderServiceImpl orderServiceImpl;
 
     @PostMapping(value = "/create")
-    public ProductDTO create(@RequestBody ProductDTO productDTO) {
-        return productServiceImpl.save(productDTO);
+    public OrderDTO create(@RequestBody OrderDTO orderDTO) {
+        return orderServiceImpl.save(orderDTO);
     }
 
     /*@GetMapping(value = "/get-all")
     public List<ProductDTO> findAll() {
-        return productServiceImpl.finAll();
+        return orderServiceImpl.finAll();
     }
 
     @GetMapping(value = "/get-one")
     public Products findById(@RequestParam Long id) {
-        Optional<Products> optionalProducts = productServiceImpl.findById(id);
+        Optional<Products> optionalProducts = orderServiceImpl.findById(id);
         if (!optionalProducts.isPresent()) {
             log.error("ID " + id + "is not exist");
             ResponseEntity.badRequest().build();
@@ -39,19 +40,19 @@ public class ProductController {
     }
     @PutMapping(value = "/update")
     public Products update(@RequestParam Long id,@RequestBody Products products){
-        if(!productServiceImpl.findById(id).isPresent()){
+        if(!orderServiceImpl.findById(id).isPresent()){
             log.error("ID "+ id + "is not exist");
         }
-        return productServiceImpl.save(products);
+        return orderServiceImpl.save(products);
     }
 
     @DeleteMapping(value = "/delete")
     public void delete(@RequestParam Long id){
-        if(!productServiceImpl.findById(id).isPresent()){
+        if(!orderServiceImpl.findById(id).isPresent()){
             log.error("ID "+ id + "is not exist");
             ResponseEntity.badRequest().build();
         }
-        productServiceImpl.deleteById(id);
+        orderServiceImpl.deleteById(id);
 
     }*/
 }

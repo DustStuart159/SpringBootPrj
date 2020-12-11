@@ -1,8 +1,11 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.models.Categories;
+import com.example.demo.models.Orders;
 import com.example.demo.repository.ICategoryRepository;
 import com.example.demo.service.ICategoryService;
+import com.example.demo.service.dto.CategoryDTO;
+import com.example.demo.service.mapper.CategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +15,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements ICategoryService {
-
     private final ICategoryRepository iCategoryRepository;
+    private final CategoryMapper mapper = new CategoryMapper();
 
     public List<Categories> finAll(){
         return iCategoryRepository.findAll();
@@ -23,8 +26,9 @@ public class CategoryServiceImpl implements ICategoryService {
         return iCategoryRepository.findById(id);
     }
 
-    public Categories save(Categories products){
-        return  iCategoryRepository.save(products);
+    public CategoryDTO save(CategoryDTO categoryDTO){
+        Categories category = iCategoryRepository.save(mapper.convertToEntity(categoryDTO));
+        return mapper.convertToDTO(category);
     }
     public void deleteById(Long id)
     {
