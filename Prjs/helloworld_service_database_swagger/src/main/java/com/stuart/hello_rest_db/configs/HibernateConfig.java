@@ -1,3 +1,4 @@
+/*
 package com.stuart.hello_rest_db.configs;
 
 import org.hibernate.SessionFactory;
@@ -75,3 +76,4 @@ public class HibernateConfig {
         return transactionManager;
     }
 }
+*/
