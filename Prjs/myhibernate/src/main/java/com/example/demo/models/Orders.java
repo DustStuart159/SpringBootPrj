@@ -18,14 +18,14 @@ public class Orders {
     private Long id;
     private String order_name;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "product_order",
             joinColumns = {@JoinColumn(name = "order_id")},
             inverseJoinColumns = {@JoinColumn(name = "product_id")}
     )
     /*@JsonBackReference*/
-    @JsonIgnore
+    /*@JsonIgnore*/
     private List<Products> products = new ArrayList<>();
 
 }

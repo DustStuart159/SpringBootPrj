@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class OrderController {
     private final OrderServiceImpl orderServiceImpl;
 
+    @Transactional
     @PostMapping(value = "/create")
     public OrderDTO create(@RequestBody OrderDTO orderDTO) {
         return orderServiceImpl.save(orderDTO);

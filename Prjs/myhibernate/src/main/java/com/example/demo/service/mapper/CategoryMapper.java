@@ -4,12 +4,9 @@ import com.example.demo.models.Categories;
 import com.example.demo.models.Products;
 import com.example.demo.repository.IProductRepository;
 import com.example.demo.service.dto.CategoryDTO;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,9 +32,26 @@ public class CategoryMapper {
 
         res.setId(input.getId());
         res.setCategory_name(input.getCategory_name());
+        res.setProducts(this.getProductList(input.getProduct_ids()));
         this.updateProduct(input.getProduct_ids(), res);
 
         return res;
+    }
+
+    private List<Products> getProductList(List<Long> product_ids) {
+        List<Products> list = new ArrayList<>();
+
+        for (long id : product_ids){
+            Optional<Products> opt = productRepo.findById(id);
+            if (opt.isPresent()){
+                list.add(opt.get());
+            }else {
+                // xử lý hiển thị sai id product
+                System.err.println("Không tồn tại Product có id là " + id);
+            }
+        }
+
+        return  list;
     }
 
     private void updateProduct(List<Long> product_ids, Categories category) {

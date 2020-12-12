@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.models.Orders;
 import com.example.demo.repository.IOrderRepository;
+import com.example.demo.repository.IProductRepository;
 import com.example.demo.service.dto.OrderDTO;
 import com.example.demo.service.mapper.OrderMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class OrderServiceImpl {
     @Autowired
     private OrderMapper mapper;
 
-    public List<OrderDTO> finAll(){
+    public List<OrderDTO> findAll(){
         List<OrderDTO> listDTO = new ArrayList<>();
 
         List<Orders> list = iOrderRepository.findAll();

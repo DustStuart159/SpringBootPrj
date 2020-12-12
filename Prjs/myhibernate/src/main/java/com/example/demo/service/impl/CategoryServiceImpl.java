@@ -4,8 +4,8 @@ import com.example.demo.models.Categories;
 import com.example.demo.repository.ICategoryRepository;
 import com.example.demo.service.dto.CategoryDTO;
 import com.example.demo.service.mapper.CategoryMapper;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +15,11 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class CategoryServiceImpl {
-    private final ICategoryRepository iCategoryRepository;
-    private final CategoryMapper mapper;
+    @Autowired
+    private ICategoryRepository iCategoryRepository;
+    @Autowired
+    private CategoryMapper mapper;
 
     public CategoryDTO findById(Long id){
         Optional<Categories> optionalCategory = iCategoryRepository.findById(id);
@@ -32,9 +33,8 @@ public class CategoryServiceImpl {
     }
 
     public CategoryDTO save(CategoryDTO categoryDTO){
-        long id = iCategoryRepository.save(mapper.convertToEntity(categoryDTO)).getId();
-
-        return mapper.convertToDTO(iCategoryRepository.getOne(id));
+        Categories category = iCategoryRepository.save(mapper.convertToEntity(categoryDTO));
+        return mapper.convertToDTO(category);
     }
     public void deleteById(Long id)
     {
