@@ -22,9 +22,11 @@ public class Products {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     /*@JsonManagedReference*/
+    @JsonIgnore
     private Categories category;
 
-    @ManyToMany(mappedBy = "products", cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     /*@JsonManagedReference*/
+    @JsonIgnore
     private List<Orders> orders = new ArrayList<>();
 }

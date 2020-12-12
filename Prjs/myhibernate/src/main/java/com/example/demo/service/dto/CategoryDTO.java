@@ -16,6 +16,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CategoryDTO implements Serializable {
     private long id;
+    private List<Long> product_ids;
     private String category_name;
     private List<Products> products = new ArrayList<>();
 }

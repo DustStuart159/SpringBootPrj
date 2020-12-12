@@ -11,26 +11,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/categories")
-@Slf4j
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryServiceImpl categoryServiceImpl;
     @Autowired
     private ICategoryRepository repo;
 
+    @Transactional
     @PostMapping(value = "/create")
     public CategoryDTO create(@RequestBody CategoryDTO category) {
         return categoryServiceImpl.save(category);
     }
 
     @GetMapping(value = "/get-all")
-    public List<Categories> findAll() {
-        return repo.findAll();
+    public List<CategoryDTO> findAll() {
+        return categoryServiceImpl.findAll();
+    }
+
+    @GetMapping(value = "/get-one")
+    public CategoryDTO findById(@RequestParam Long id) {
+        return categoryServiceImpl.findById(id);
     }
 
     /*@GetMapping(value = "/get-all")
