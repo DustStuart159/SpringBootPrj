@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.models.Categories;
-import com.example.demo.models.Products;
 import com.example.demo.repository.ICategoryRepository;
-import com.example.demo.repository.IProductRepository;
 import com.example.demo.service.dto.CategoryDTO;
 import com.example.demo.service.impl.CategoryServiceImpl;
 import com.example.demo.service.impl.OrderServiceImpl;
@@ -22,10 +20,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryServiceImpl categoryServiceImpl;
+    @Autowired
+    private ICategoryRepository repo;
 
     @PostMapping(value = "/create")
     public CategoryDTO create(@RequestBody CategoryDTO category) {
         return categoryServiceImpl.save(category);
+    }
+
+    @GetMapping(value = "/get-all")
+    public List<Categories> findAll() {
+        return repo.findAll();
     }
 
     /*@GetMapping(value = "/get-all")

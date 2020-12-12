@@ -1,19 +1,24 @@
 package com.example.demo.service.mapper;
 
+
 import com.example.demo.models.Categories;
 import com.example.demo.models.Orders;
 import com.example.demo.models.Products;
 import com.example.demo.repository.ICategoryRepository;
 import com.example.demo.repository.IOrderRepository;
-import com.example.demo.repository.IProductRepository;
+
 import com.example.demo.service.dto.ProductDTO;
-import com.example.demo.service.impl.OrderServiceImpl;
+import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Configuration
 public class ProductMapper {
     @Autowired
     private IOrderRepository iOrderRepository;

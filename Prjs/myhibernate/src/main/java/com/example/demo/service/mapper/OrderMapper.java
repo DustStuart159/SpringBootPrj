@@ -1,10 +1,10 @@
 package com.example.demo.service.mapper;
 
 import com.example.demo.models.Orders;
-import com.example.demo.models.Products;
 import com.example.demo.service.dto.OrderDTO;
-import com.example.demo.service.dto.ProductDTO;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class OrderMapper {
    /* convert tu entity -->DTO*/
     public OrderDTO convertToDTO(Orders input){

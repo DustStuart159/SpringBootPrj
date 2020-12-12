@@ -1,15 +1,15 @@
 package com.example.demo.controller;
 
 import com.example.demo.models.Products;
+import com.example.demo.repository.IProductRepository;
 import com.example.demo.service.dto.ProductDTO;
 import com.example.demo.service.impl.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
@@ -17,12 +17,23 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductServiceImpl productServiceImpl;
+    @Autowired
+    private IProductRepository repo;
 
     @PostMapping(value = "/create")
     public ProductDTO create(@RequestBody ProductDTO productDTO) {
         return productServiceImpl.save(productDTO);
     }
 
+    /*@PostMapping(value = "/create")
+    public Products create(@RequestBody Products productDTO) {
+        return repo.save(productDTO);
+    }*/
+
+    @GetMapping(value = "/get-all")
+    public List<Products> findAll() {
+        return repo.findAll();
+    }
     /*@GetMapping(value = "/get-all")
     public List<ProductDTO> findAll() {
         return productServiceImpl.finAll();

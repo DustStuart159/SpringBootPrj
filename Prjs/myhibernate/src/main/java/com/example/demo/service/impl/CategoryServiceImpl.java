@@ -1,9 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.models.Categories;
-import com.example.demo.models.Orders;
 import com.example.demo.repository.ICategoryRepository;
-import com.example.demo.service.ICategoryService;
 import com.example.demo.service.dto.CategoryDTO;
 import com.example.demo.service.mapper.CategoryMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryServiceImpl implements ICategoryService {
+public class CategoryServiceImpl {
     private final ICategoryRepository iCategoryRepository;
     private final CategoryMapper mapper = new CategoryMapper();
 

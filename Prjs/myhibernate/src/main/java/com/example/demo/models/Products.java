@@ -1,6 +1,8 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,14 +21,10 @@ public class Products {
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-
+    /*@JsonManagedReference*/
     private Categories category;
 
-    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "product_order",
-            joinColumns = {@JoinColumn(name = "product_id")},
-            inverseJoinColumns = {@JoinColumn(name = "order_id")}
-    )
+    @ManyToMany(mappedBy = "products", cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    /*@JsonManagedReference*/
     private List<Orders> orders = new ArrayList<>();
 }

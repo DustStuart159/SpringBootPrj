@@ -2,6 +2,7 @@ package com.example.demo.service.dto;
 
 import com.example.demo.models.Categories;
 import com.example.demo.models.Orders;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
@@ -21,6 +22,6 @@ public class ProductDTO implements Serializable {
     private long category_id;
     private Categories category;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Long> order_ids = new ArrayList<>();
-    private List<Orders> orders = new ArrayList<>();
+    private List<Long> order_ids;
+    private List<Orders> orders;
 }

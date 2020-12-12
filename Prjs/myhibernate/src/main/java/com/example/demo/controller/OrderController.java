@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.models.Products;
 import com.example.demo.service.dto.OrderDTO;
-import com.example.demo.service.dto.ProductDTO;
 import com.example.demo.service.impl.OrderServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

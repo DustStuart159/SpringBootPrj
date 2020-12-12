@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -23,6 +24,7 @@ public class Orders {
             joinColumns = {@JoinColumn(name = "order_id")},
             inverseJoinColumns = {@JoinColumn(name = "product_id")}
     )
+    /*@JsonBackReference*/
     @JsonIgnore
     private List<Products> products = new ArrayList<>();
 
