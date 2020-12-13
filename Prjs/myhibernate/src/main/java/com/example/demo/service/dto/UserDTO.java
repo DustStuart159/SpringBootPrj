@@ -8,8 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,9 +18,11 @@ import java.util.Set;
 @Setter
 @ToString
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class OrderDTO {
+public class UserDTO {
     private long id;
-    private String order_name;
-    private Long user_id;
-    private Users user;
+    private String user_name;
+    private List<Long> order_ids;
+    private Set<Orders> orders = new HashSet<>();
+    private List<Long> role_ids = new ArrayList<>();
+    private Set<Roles> roles = new HashSet<>();
 }

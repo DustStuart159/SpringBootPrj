@@ -1,48 +1,43 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.models.Orders;
+import com.example.demo.models.Roles;
 import com.example.demo.repository.IOrderRepository;
-import com.example.demo.repository.IProductRepository;
+import com.example.demo.repository.IRoleRepository;
+import com.example.demo.service.IOrderService;
+import com.example.demo.service.IRoleService;
 import com.example.demo.service.dto.OrderDTO;
+import com.example.demo.service.dto.RoleDTO;
 import com.example.demo.service.mapper.OrderMapper;
+import com.example.demo.service.mapper.RoleMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Access;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
-public class OrderServiceImpl {
-    @Autowired
-    private IOrderRepository iOrderRepository;
-    @Autowired
-    private OrderMapper mapper;
+@RequiredArgsConstructor
+public class OrderServiceImpl implements IOrderService {
+    private final IOrderRepository orderRepo;
+    private final OrderMapper orderMapper;
 
-    public List<OrderDTO> findAll(){
-        List<OrderDTO> listDTO = new ArrayList<>();
+    @Override
+    public OrderDTO save(OrderDTO roleDTO) {
+        Orders order = orderRepo.save(orderMapper.convertToEntity(roleDTO));
 
-        List<Orders> list = iOrderRepository.findAll();
+        return orderMapper.convertToDto(order);
+    }
 
-        for (Orders order : list){
-            listDTO.add(mapper.convertToDTO(order));
+    @Override
+    public Set<OrderDTO> findAll() {
+        Set<OrderDTO> set = new HashSet<>();
+
+        for (Orders order : orderRepo.findAll()) {
+            set.add(orderMapper.convertToDto(order));
         }
 
-        return listDTO;
-    }
-
-    public Optional<Orders> findById(Long id){
-        return iOrderRepository.findById(id);
-    }
-
-    public OrderDTO save(OrderDTO orderDTO){
-        Orders order = iOrderRepository.save(mapper.convertToEntity(orderDTO));
-        return mapper.convertToDTO(order);
-    }
-    public void deleteById(Long id)
-    {
-        iOrderRepository.deleteById(id);
+        return set;
     }
 }

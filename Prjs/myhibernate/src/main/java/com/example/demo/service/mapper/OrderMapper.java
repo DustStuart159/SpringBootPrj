@@ -1,64 +1,57 @@
 package com.example.demo.service.mapper;
 
 import com.example.demo.models.Orders;
-import com.example.demo.models.Products;
-import com.example.demo.repository.IProductRepository;
+import com.example.demo.models.Users;
+import com.example.demo.repository.IUserRepository;
 import com.example.demo.service.dto.OrderDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class OrderMapper {
-    @Autowired
-    private IProductRepository productRepository;
-   /* convert tu entity -->DTO*/
-    public OrderDTO convertToDTO(Orders input){
+    private final IUserRepository userRepo;
+
+    public OrderDTO convertToDto(Orders input) {
         OrderDTO res = new OrderDTO();
 
         res.setId(input.getId());
         res.setOrder_name(input.getOrder_name());
-        res.setProducts(input.getProducts());
+        res.setUser(input.getUser());
 
         return res;
     }
 
-   /* convert tu DTO --> Entity*/
-    public Orders convertToEntity(OrderDTO input){
+    public Orders convertToEntity(OrderDTO input) {
         Orders res = new Orders();
 
         res.setId(input.getId());
         res.setOrder_name(input.getOrder_name());
-        res.setProducts(this.getProductList(input.getProduct_ids()));
-        this.updateProductList(res);
+        res.setUser(this.getUserById(input.getUser_id()));
+        this.updateRelationTable(res);
 
         return res;
     }
 
-    private void updateProductList(Orders order) {
-        for (Products product : order.getProducts()){
-            product.getOrders().add(order);
-            productRepository.save(product);
-        }
+    private void updateRelationTable(Orders res) {
+        Users user = res.getUser();
+        if (null == user) return;
+
+        user.getOrders().add(res);
+        userRepo.save(user);
     }
 
-    private List<Products> getProductList(List<Long> product_ids) {
-        List<Products> list = new ArrayList<>();
+    private Users getUserById(Long id) {
+        if (null == id) return null;
 
-        for (long id : product_ids){
-            Optional<Products> opt = productRepository.findById(id);
-            if (opt.isPresent()){
-                list.add(opt.get());
-            }else {
-                // xử lý hiển thị sai id product
-                System.err.println("Không tồn tại Product có id là " + id);
-            }
+        Optional<Users> opt = userRepo.findById(id);
+        if (opt.isPresent()) {
+            return opt.get();
+        } else {
+            System.err.println("Không tồn tại user có id là " + id);
+            return null;
         }
-
-        return list;
     }
-
 }
