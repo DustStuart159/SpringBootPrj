@@ -1,26 +1,26 @@
 package com.example.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
-@Entity(name = "roles")
-@Table(name = "roles")
+@Entity(name = "accounts")
+@Table(name = "accounts")
 @Getter
 @Setter
 @ToString
-public class Roles {
+public class Accounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String role_name;
+    private String account_name;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonBackReference
-    private Set<Users> users = new HashSet<>();
+    private Users user;
 }

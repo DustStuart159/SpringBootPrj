@@ -5,22 +5,22 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
-@Entity(name = "roles")
-@Table(name = "roles")
+import javax.persistence.*;
+
+@Entity(name = "contacts")
+@Table(name = "contacts")
 @Getter
 @Setter
 @ToString
-public class Roles {
+public class Contacts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String role_name;
+    private String contact_name;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonBackReference
-    private Set<Users> users = new HashSet<>();
+    private Users user;
 }

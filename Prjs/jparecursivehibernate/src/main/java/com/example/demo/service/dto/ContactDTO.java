@@ -6,17 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 @Getter
 @Setter
 @ToString
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class RoleDTO {
+public class ContactDTO {
     private long id;
-    private String role_name;
-    private List<Long> user_ids;
-    private Set<Users> users = new HashSet<>();
+    private String contact_name;
+    private Long user_id;
+    private Users user;
 }

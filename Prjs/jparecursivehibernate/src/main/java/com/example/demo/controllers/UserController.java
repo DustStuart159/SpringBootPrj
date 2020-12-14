@@ -22,6 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/get-all")
+    @Transactional
     public Set<UserDTO> findAll(){
         return userService.findAll();
     }

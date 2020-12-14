@@ -6,6 +6,7 @@ import com.example.demo.service.IOrderService;
 import com.example.demo.service.dto.UserDTO;
 import com.example.demo.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -28,8 +29,9 @@ public class UserServiceImpl implements IOrderService {
     public Set<UserDTO> findAll() {
         Set<UserDTO> set = new HashSet<>();
 
-        for (Users order : orderRepo.findAll()) {
-            set.add(orderMapper.convertToDto(order));
+        for (Users user : orderRepo.findAll()) {
+            Hibernate.initialize(user.getAccounts());
+            set.add(orderMapper.convertToDto(user));
         }
 
         return set;
