@@ -18,5 +18,6 @@ public class UserDTO {
     private String user_name;
     private List<Long> role_ids;
     private Set<RoleDTO> roles = new HashSet<>();
+    private List<Long> contact_ids;
     private Set<ContactDTO> contacts = new HashSet<>();
 }
