@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -27,14 +28,8 @@ public class Users {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    @JsonBackReference
     private Set<Roles> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    @JsonBackReference
-    private Set<Accounts> accounts = new HashSet<>();
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    @JsonBackReference
     private Set<Contacts> contacts = new HashSet<>();
 }

@@ -1,8 +1,5 @@
 package com.example.demo.service.dto;
 
-import com.example.demo.models.Accounts;
-import com.example.demo.models.Contacts;
-import com.example.demo.models.Roles;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,9 +17,6 @@ public class UserDTO {
     private long id;
     private String user_name;
     private List<Long> role_ids;
-    private Set<Roles> roles = new HashSet<>();
-    private List<Long> account_ids;
-    private Set<Accounts> accounts = new HashSet<>();
-    private List<Long> contact_ids;
-    private Set<Contacts> contacts = new HashSet<>();
+    private Set<RoleDTO> roles = new HashSet<>();
+    private Set<ContactDTO> contacts = new HashSet<>();
 }

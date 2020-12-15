@@ -18,5 +18,5 @@ public class RoleDTO {
     private long id;
     private String role_name;
     private List<Long> user_ids;
-    private Set<Users> users = new HashSet<>();
+    private Set<UserDTO> users = new HashSet<>();
 }

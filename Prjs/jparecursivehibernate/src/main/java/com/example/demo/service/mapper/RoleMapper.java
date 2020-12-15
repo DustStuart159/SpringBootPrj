@@ -8,21 +8,28 @@ import com.example.demo.service.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class RoleMapper extends BaseMapper {
     private final IUserRepository userRepo;
-    public RoleDTO convertToDTO(Roles input) {
-        RoleDTO res = super.tranferData(input, new RoleDTO());
 
+    public RoleDTO convertToDTO(Roles input) {
+        RoleDTO res = super.tranferData(input, RoleDTO.class);
+
+        for (UserDTO userDTO : res.getUsers()){
+            userDTO.setRoles(new HashSet<>());
+        }
 
         return res;
     }
 
     public Roles convertToEntity(RoleDTO input) {
-        Roles res = super.tranferData(input, new Roles());
+        Roles res = super.tranferData(input, Roles.class);
 
-        res.setUsers(this.getSetDataByIds(input.getUser_ids(), userRepo, new Users()));
+        res.setUsers(this.getSetDataByIds(input.getUser_ids(), userRepo, Users.class));
 
         return res;
     }

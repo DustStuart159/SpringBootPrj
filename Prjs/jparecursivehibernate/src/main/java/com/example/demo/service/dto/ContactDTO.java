@@ -14,5 +14,5 @@ public class ContactDTO {
     private long id;
     private String contact_name;
     private Long user_id;
-    private Users user;
+    private UserDTO user;
 }

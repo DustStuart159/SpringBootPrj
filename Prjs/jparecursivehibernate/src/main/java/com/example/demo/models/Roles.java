@@ -20,7 +20,11 @@ public class Roles {
     private long id;
     private String role_name;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-    @JsonBackReference
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
     private Set<Users> users = new HashSet<>();
 }

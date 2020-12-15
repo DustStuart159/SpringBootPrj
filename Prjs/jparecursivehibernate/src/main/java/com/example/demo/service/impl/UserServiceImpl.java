@@ -30,7 +30,6 @@ public class UserServiceImpl implements IOrderService {
         Set<UserDTO> set = new HashSet<>();
 
         for (Users user : orderRepo.findAll()) {
-            Hibernate.initialize(user.getAccounts());
             set.add(orderMapper.convertToDto(user));
         }
 
