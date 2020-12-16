@@ -7,4 +7,5 @@ import java.util.Set;
 public interface IContactService {
     ContactDTO save(ContactDTO contactDTO);
     Set<ContactDTO> findAll();
+    ContactDTO findById(Long id);
 }

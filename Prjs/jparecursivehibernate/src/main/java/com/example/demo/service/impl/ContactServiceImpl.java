@@ -6,13 +6,17 @@ import com.example.demo.service.IContactService;
 import com.example.demo.service.dto.ContactDTO;
 import com.example.demo.service.mapper.ContactMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ContactServiceImpl implements IContactService {
     private final IContactRepository contactRepo;
     private final ContactMapper contactMapper;
@@ -33,5 +37,16 @@ public class ContactServiceImpl implements IContactService {
         }
 
         return set;
+    }
+
+    @Override
+    public ContactDTO findById(Long id) {
+        Optional<Contacts> opt = contactRepo.findById(id);
+        if (!opt.isPresent()){
+            log.error("ID " + id + "is not exist");
+            ResponseEntity.badRequest().build();
+        }
+
+        return contactMapper.convertToDTO(opt.get());
     }
 }

@@ -5,6 +5,7 @@ import com.example.demo.service.impl.ContactServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.Set;
 
 @RestController
@@ -21,5 +22,10 @@ public class ContactController {
     @GetMapping("/get-all")
     public Set<ContactDTO> findAll(){
         return contactService.findAll();
+    }
+
+    @GetMapping("/get-one")
+    public ContactDTO findById(@RequestParam long id){
+        return contactService.findById(id);
     }
 }

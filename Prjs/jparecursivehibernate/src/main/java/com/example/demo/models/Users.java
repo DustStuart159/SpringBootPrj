@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,14 +23,11 @@ public class Users {
     private long id;
     private String user_name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
-    )
-    private Set<Roles> roles = new HashSet<>();
+    @OneToOne
+    @JoinColumn(name = "contact_id", referencedColumnName = "id")
+    private Contacts contact;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<Contacts> contacts = new HashSet<>();
+    @OneToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Roles role;
 }

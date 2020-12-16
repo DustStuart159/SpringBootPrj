@@ -2,35 +2,37 @@ package com.example.demo.service.impl;
 
 import com.example.demo.models.Users;
 import com.example.demo.repository.IUserRepository;
-import com.example.demo.service.IOrderService;
+import com.example.demo.service.IUserService;
 import com.example.demo.service.dto.UserDTO;
 import com.example.demo.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements IOrderService {
-    private final IUserRepository orderRepo;
-    private final UserMapper orderMapper;
+public class UserServiceImpl implements IUserService {
+    private final IUserRepository userRepo;
+    private final UserMapper userMapper;
 
     @Override
     public UserDTO save(UserDTO roleDTO) {
-        Users order = orderRepo.save(orderMapper.convertToEntity(roleDTO));
+        Users order = userRepo.save(userMapper.convertToEntity(roleDTO));
 
-        return orderMapper.convertToDto(order);
+        return userMapper.convertToDto(order);
     }
 
     @Override
     public Set<UserDTO> findAll() {
         Set<UserDTO> set = new HashSet<>();
 
-        for (Users user : orderRepo.findAll()) {
-            set.add(orderMapper.convertToDto(user));
+        for (Users user : userRepo.findAll()) {
+            set.add(userMapper.convertToDto(user));
         }
 
         return set;

@@ -1,13 +1,24 @@
 package com.example.demo.service.mapper;
 
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.*;
 
 public abstract class BaseMapper {
     protected final ModelMapper modelMapper = new ModelMapper();
+
+    @Bean
+    public void configMapper() {
+        // config để fix lỗi 'matches multiple source property hierarchies'
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+    }
 
     /**
      * @param origin   đối tượng chứa data cần transfer
@@ -62,5 +73,21 @@ public abstract class BaseMapper {
         }
 
         return set;
+    }
+
+    public <D> D configDisplayInfo(D inputDTO, Type baseType) {
+        for (Field field : inputDTO.getClass().getDeclaredFields()) {
+            try {
+                if (field.get(inputDTO) != null && field.getType().equals(baseType)) {
+                    field.set(inputDTO, null);
+                } else if (field.get(inputDTO) != null) {
+                    this.configDisplayInfo(field.get(inputDTO), baseType);
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return inputDTO;
     }
 }
